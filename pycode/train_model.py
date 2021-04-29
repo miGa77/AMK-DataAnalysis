@@ -10,9 +10,9 @@ import matplotlib.pyplot as plt
 from sklearn.utils import shuffle
 
 # Read the data...
-data = pd.read_csv(r'../A_Z Handwritten Data/A_Z Handwritten Data.csv').astype('float32')
+data = pd.read_csv(r'../A_Z Handwritten Data/chars_and_numbers.csv').astype('float32')
 
-# Split data the X - Our data , and y - the prdict label
+# Split data the X - Our data , and y - the predict label
 X = data.drop('0',axis = 1)
 y = data['0']
 
@@ -25,11 +25,12 @@ print("Train data shape: ", train_x.shape)
 print("Test data shape: ", test_x.shape)
 
 # Dictionary for getting characters from index values...
-word_dict = {0:'A',1:'B',2:'C',3:'D',4:'E',5:'F',6:'G',7:'H',8:'I',9:'J',10:'K',11:'L',12:'M',13:'N',14:'O',15:'P',16:'Q',17:'R',18:'S',19:'T',20:'U',21:'V',22:'W',23:'X', 24:'Y',25:'Z'}
+word_dict = {0:'A',1:'B',2:'C',3:'D',4:'E',5:'F',6:'G',7:'H',8:'I',9:'J',10:'K',11:'L',12:'M',13:'N',14:'O',15:'P',16:'Q',17:'R',18:'S',19:'T',20:'U',21:'V',22:'W',23:'X', 24:'Y',25:'Z',26:'0',27:'1',28:'2',29:'3',30:'4',31:'5',32:'6',33:'7', 34:'8',35:'9'}
+label_count = len(word_dict)
 
 # Plotting the number of alphabets in the dataset...
 train_yint = np.int0(y)
-count = np.zeros(26, dtype='int')
+count = np.zeros(label_count, dtype='int')
 for i in train_yint:
     count[i] +=1
 
@@ -63,10 +64,10 @@ test_X = test_x.reshape(test_x.shape[0], test_x.shape[1], test_x.shape[2],1)
 print("New shape of train data: ", test_X.shape)
 
 # Converting the labels to categorical values...
-train_yOHE = to_categorical(train_y, num_classes = 26, dtype='int')
+train_yOHE = to_categorical(train_y, num_classes = label_count, dtype='int')
 print("New shape of train labels: ", train_yOHE.shape)
 
-test_yOHE = to_categorical(test_y, num_classes = 26, dtype='int')
+test_yOHE = to_categorical(test_y, num_classes = label_count, dtype='int')
 print("New shape of test labels: ", test_yOHE.shape)
 
 
@@ -87,7 +88,7 @@ model.add(Flatten())
 model.add(Dense(64,activation ="relu"))
 model.add(Dense(128,activation ="relu"))
 
-model.add(Dense(26,activation ="softmax"))
+model.add(Dense(label_count,activation ="softmax"))
 
 model.compile(optimizer = Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=1, min_lr=0.0001)
@@ -96,7 +97,7 @@ early_stop = EarlyStopping(monitor='val_loss', min_delta=0, patience=2, verbose=
 history = model.fit(train_X, train_yOHE, epochs=1, callbacks=[reduce_lr, early_stop],  validation_data = (test_X,test_yOHE))
 
 model.summary()
-model.save(r'model/model.h5')
+model.save(r'model/model_chars_and_numbs.h5')
 
 # Displaying the accuracies & losses for train & validation set...
 print("The validation accuracy is :", history.history['val_accuracy'])
