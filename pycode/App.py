@@ -2,12 +2,14 @@ import numpy as np
 import win32gui
 import cv2
 import tkinter as tk
+import ctypes
 from tkinter import *
 from PIL import ImageGrab
 from keras.models import load_model
 
 # Import model
 model = load_model(r'model/model_chars_and_numbs.h5')
+
 
 class App(tk.Tk):
     def __init__(self):
@@ -33,12 +35,11 @@ class App(tk.Tk):
         self.canvas.delete("all")
 
     def classify_handwriting(self):
-        # Windows display scale settings
-        display_scale = 1.25
-
+        # Window display scale settings
+        scaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0) / 100
         HWND = self.canvas.winfo_id()  # get the handle of the canvas
         left, top, right, bottom = win32gui.GetWindowRect(HWND)
-        rect = (left*display_scale, top*display_scale, right*display_scale, bottom*display_scale)
+        rect = (left * scaleFactor, top * scaleFactor, right * scaleFactor, bottom * scaleFactor)
         im = ImageGrab.grab(rect)
 
         rgb_image = im.convert('RGB')
@@ -76,6 +77,7 @@ class App(tk.Tk):
         r = 8
         self.canvas.create_oval(self.x - r, self.y - r, self.x + r, self.y + r, fill='black')
         # print(event.x, event.y)
+
 
 app = App()
 mainloop()
