@@ -1,75 +1,55 @@
+import os
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+import tkinter as tk
 from tkinter import *
+
 from PIL import ImageGrab
 from keras.models import load_model
-import evalPicture as lib
+import evalPicture as ownLib
 
-
-# WORK IN PROGRESS
-# region Funktionen
-def clear_widget():
-    global cv
-    # To clear a canvas
-    cv.delete("all")
-
-
-def activate_event(event):
-    global lastx, lasty
-    cv.bind('<B1-Motion>', draw_lines)
-    lastx, lasty = event.x, event.y
-
-
-def draw_lines(event):
-    global lasty, lasty
-    x, y = event.x, event.y
-    # do the canvas drawings
-    cv.create_line((lastx, lasty, x, y), width=8, fill='black', capstyle=ROUND, smooth=TRUE)
-    lasty, lasty = x, y
-
-
-def Recognize_Digit():
-    global image_number
-    # image_number = 0
-    filename = f'image_{image_number}.png'
-    widget = cv
-
-    # get the widget coordinates
-    x = root.winfo_rootx() + widget.winfo_x()
-    y = root.winfo_rooty() + widget.winfo_y()
-    x1 = x + widget.winfo_width()
-    y1 = y + widget.winfo_height()
-
-    # grab the image, crop it according to the requirement and saved it in png format
-    ImageGrab.grab().crop((x, y, x1, y1)).save(filename)
-    lib.recognize(filename, model)
-
-
-# endregion
-
-# region Main
-# load model
 model = load_model(r'model_Balanced.h5')
-print("Model load successfully, go for the APP")
-# create a main window first(names as root)
-root = Tk()
-root.resizable(0, 0)
-root.title("Handwritten Digit Recognition GUI App")
+width = 952
+height = 952
+filename = r'images/my_drawing.jpg'
 
-# Initialize few variables
-lastx, lasty = None, None
-image_number = 0
 
-# create canvas for drawing
-cv = Canvas(root, width=640, height=480, bg='white')
-cv.grid(row=0, column=0, pady=2, sticky=W, columnspan=2)
-cv.bind('<Button-1>', activate_event)
+class App(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self.x = self.y = 0
+        self.resizable(width=False, height=False)
+        self.title("Handwritten Expressions Recognition")
+        # Creating elements
+        self.canvas = tk.Canvas(self, width=width, height=height, bg="white", cursor="cross")
+        self.classify_btn = tk.Button(self, text="Recognise", command=self.classify_handwriting)
+        self.button_clear = tk.Button(self, text="Clear", command=self.clear_all)
 
-# Add Buttons and Labels
-btn_save = Button(text='Recognize Digit', command=Recognize_Digit)
-btn_save.grid(row=2, column=0, pady=1, padx=1)
-button_clear = Button(text="Clear Widget", command=clear_widget)
-button_clear.grid(row=2, column=1, pady=1, padx=1)
+        # Grid structure
+        self.canvas.grid(row=0, column=0, pady=2, sticky=W)
+        self.classify_btn.grid(row=0, column=1, pady=20, padx=20)
+        self.button_clear.grid(row=0, column=2, pady=20, padx=20)
 
-# mainloop
-root.mainloop()
+        self.canvas.bind("<B1-Motion>", self.draw_lines)
 
-# endregion
+    def clear_all(self):
+        self.canvas.delete("all")
+
+    def draw_lines(self, event):
+        self.x = event.x
+        self.y = event.y
+        # font weight
+        r = 6
+        self.canvas.create_oval(self.x - r, self.y - r, self.x + r, self.y + r, fill='black')
+
+    def classify_handwriting(self):
+        x = self.winfo_rootx() + self.canvas.winfo_x()
+        y = self.winfo_rooty() + self.canvas.winfo_y()
+        x1 = x + self.canvas.winfo_width()
+        y1 = y + self.canvas.winfo_height()
+        ImageGrab.grab().crop((x, y, x1, y1)).save(filename)
+        ownLib.recognize(filename, model)
+
+
+app = App()
+tk.mainloop()
