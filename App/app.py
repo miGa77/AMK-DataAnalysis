@@ -48,7 +48,8 @@ class App(tk.Tk):
         x1 = x + self.canvas.winfo_width()
         y1 = y + self.canvas.winfo_height()
         ImageGrab.grab().crop((x, y, x1, y1)).save(filename)
-        ownLib.recognize(filename, model)
+        resized_filename = ownLib.resize_picture_to_useful_format(filename)
+        ownLib.recognize(resized_filename, model)
 
 
 app = App()

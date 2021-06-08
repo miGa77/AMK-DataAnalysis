@@ -1,6 +1,9 @@
+import os
+
 import cv2
 import imutils
 import numpy as np
+from PIL import Image
 
 LABELS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
           'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'd', 'e',
@@ -43,5 +46,20 @@ def recognize(filename, model):
             cv2.waitKey(0)
         except Exception as e:
             print(str(e))
+
+
+def resize_picture_to_useful_format(filename):
+    image = Image.open(filename, 'r')
+    width = image.size[0]
+    height = image.size[1]
+    resize_width = 28 - ((width % 28)) + width + (3 * 28)
+    resize_height = (28 - (height % 28)) + height + (3 * 28)
+    resized_image = Image.new('RGBA', (resize_width, resize_height), (255, 255, 255, 255))
+    offset = (int(round(((resize_width - width) / 2), 0)), int(round(((resize_height - height) / 2), 0)))
+    resized_image.paste(image, offset)
+    file_name, file_extension = os.path.splitext(filename)
+    save_filename = file_name + "_resized" + file_extension
+    resized_image.save(save_filename)
+    return save_filename
 
 # endregion
