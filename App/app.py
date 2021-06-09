@@ -11,7 +11,7 @@ import evalPicture as ownLib
 model = load_model(r'model_Balanced.h5')
 width = 952
 height = 952
-filename = r'images/my_drawing.jpg'
+filename = r'images/my_drawing.png'
 
 
 class App(tk.Tk):
