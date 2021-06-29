@@ -1,4 +1,5 @@
 import os
+
 import keras
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -106,7 +107,7 @@ model = create_model()
 print("Model has been successfully created...")
 print("Training model...")
 # fit the model
-history = model.fit(training_images, training_labels, validation_data=(test_images, test_labels), epochs=20,
+history = model.fit(training_images, training_labels, validation_data=(test_images, test_labels), epochs=10,
                     batch_size=256, shuffle=True, verbose=2)
 print("Model has been successfully trained...")
 
