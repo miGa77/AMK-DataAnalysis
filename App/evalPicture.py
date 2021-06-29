@@ -2,12 +2,23 @@ import os
 
 import cv2
 import imutils
+import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
-LABELS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-          'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'd', 'e',
-          'f', 'g', 'h', 'n', 'q', 'r', 't']
+
+# import Labels from mapping.txt
+def __import_mapping_file(filename):
+    with open(filename) as file:
+        content = file.read().splitlines()
+        labels = []
+        for line in content:
+            arr = line.split()
+            labels.insert(int(arr[0]), chr(int(arr[1])))
+    return labels
+
+
+__LABELS = __import_mapping_file("./emnist-balanced-mapping.txt")
 
 
 # region Library
@@ -35,7 +46,7 @@ def recognize(filename, model):
             img = img / 255.0
             pred = model.predict([img])[0]
             index = np.argmax(pred)
-            final_pred = LABELS[index]
+            final_pred = __LABELS[index]
             data = str(final_pred)
             font = cv2.FONT_HERSHEY_SIMPLEX
             fontScale = 0.5
@@ -54,7 +65,7 @@ def resize_picture_to_useful_format(filename):
     height = image.size[1]
     resize_width = 28 - ((width % 28)) + width + (3 * 28)
     resize_height = (28 - (height % 28)) + height + (3 * 28)
-    resized_image = Image.new('RGBA', (resize_width, resize_height), (255, 255, 255, 255))
+    resized_image = Image.new('RGB', (resize_width, resize_height), (255, 255, 255))
     offset = (int(round(((resize_width - width) / 2), 0)), int(round(((resize_height - height) / 2), 0)))
     resized_image.paste(image, offset)
     file_name, file_extension = os.path.splitext(filename)
