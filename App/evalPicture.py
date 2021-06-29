@@ -18,7 +18,7 @@ def __import_mapping_file(filename):
     return labels
 
 
-__LABELS = __import_mapping_file("./emnist-balanced-mapping.txt")
+__LABELS = __import_mapping_file("data/emnist-balanced-mapping.txt")
 
 
 # region Library
