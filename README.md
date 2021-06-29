@@ -91,18 +91,18 @@ _2_ = Ausführen der *app.py*
 * Probleme beim Benutzen von unbalancierten Klassen, die aber prinzipiell einen größeren Datenbestand haben
 &rightarrow; Lösung ist das Benutzen von balancierten Klassen. Es ist durchaus üblich, dass in einem Dataset eine unausgeglichene Klassenverteilung vorliegt. Um dieses Problem zu lösen, stehen zwei gängige Methoden zur Verfügung, die Oversampling und Undersampling genannt werden. EMNIST hat bereits das Problem von unbalancierten Klassen gelöst und bietet balancierte Klassen an.
 * Probleme beim Auswerten von Bildern wo zu nah am Rand geschrieben wurde
-&rightarrow; Lösung ist das Schreiben einer Funktion, die das eigentlichte Bild nimmt und mittig auf ein größeres Bild packt. Nicht mit Resizen zu verwechseln.
+&rightarrow; Lösung ist das Schreiben einer Funktion, die das eigentliche Bild nimmt und mittig auf ein größeres Bild packt. Nicht mit Resizen zu verwechseln.
 Problem war das ROI (Region of Interest) in einer Funktion 0 war, was nicht vorkommen darf.
 * Problem das wenn man einen Buchstaben auf das ganze Canvas-Board zeichnet, der Stift zu dünn ist
 &rightarrow; Button zum Handlen von der Stiftdicke
 * Beim Ausschneiden des Canvas-Boards kam ein graue Umrandung mit
 &rightarrow; Auschneiden anpassen und verbessern 
 * Immer noch Probleme beim Auswerten von bestimmten Ziffern [1,I] [2,Z] [9,g,q] [F,f] 
- &rightarrow; Lösung wäre höchstwahrscheinlich durch ein Oversampling, was zeitlich nicht hinhaut, da man das Model mithilfe der CSV erstellen muss. Zusätzlich müsste man weitere Datenbestände von den "Problemziffern" suchen und mergen oder selbst weitere erzeugen und hinzufügen Im folgendem Bild ist das Problem einmal sichtbar.
+ &rightarrow; Lösung wäre höchstwahrscheinlich durch ein Oversampling, was zeitlich nicht hinhaut, da man das Model mithilfe der CSV erstellen muss. Zusätzlich müsste man weitere Datenbestände von den "Problemziffern" suchen und mergen oder selbst weitere erzeugen und hinzufügen. Im folgendem Bild ist das Problem einmal sichtbar.
  
 ![grafik](https://github.com/miGa77/AMK-DataAnalysis/blob/main/doc/test_2.jpg)
  
- * Weiteres Problem im folgendem Bild sichtbar. Lösung ist keine vorhanden
+ * Weiteres Problem im folgendem Bild sichtbar. Lösung ist keine vorhanden.
 ![grafik](https://github.com/miGa77/AMK-DataAnalysis/blob/main/doc/Bild.jpg)
  
  
