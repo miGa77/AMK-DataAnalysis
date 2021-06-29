@@ -1,4 +1,4 @@
-# DataAnalysis Project
+# DataAnalysis
 
 | Participant    | Identifier       |
 | ------------- |:-------------:|
@@ -6,12 +6,11 @@
 | Michael Gatterdam      |  mg9938s    |
 | André Eichstaedt | ae2894s      |
 
----
+## Einleitung
 
-## Project draft
+### Die handschriftliche alphanumerische Erkennung
 
-### Handwritten Mathematical Expressions Recognition
-___
-The handwritten mathematical expressions recognition is the ability of computers to recognize human handwritten mathematical functions. It is a hard task for the machine because handwritten digits are not perfect and can be made with many different flavors. The handwritten mathematical expressions recognition is the solution to this problem which uses the image of a digit and recognizes the digit present in the image. Therefore, we using the "CROHME: Competition on Recognition of Online Handwritten Mathematical Expressions" dataset : http://www.iapr-tc11.org/mediawiki/index.php?title=CROHME:_Competition_on_Recognition_of_Online_Handwritten_Mathematical_Expressions
+Die Erkennung handgeschriebener alphanumerischer Ausdrücke ist eine schwierige Aufgabe für die Maschine, da handgeschriebene Ziffern nicht perfekt sind und auf vielen verschiedenen Weisen geschrieben werden können. Die handgeschriebene alphanumerische Ausdruckserkennung ist die Lösung für dieses Problem, die das Bild einer Ziffer verwendet um die im Bild vorhandene Ziffer zu erkennen. Das Projekt ist ein Pythonprogramm, welches die Ausdruckserkennung mithilfe eines *faltendem neuronalem Netzwerk*
+(Englisch =  Convolutional Neural Network -> CNN) löst. Ein CNN ist ein künstliches neuronales Netz, was bei der maschinellen Verarbeitung von Bild- oder Audiodaten heutzutage oft verwendet wird. Als Datensatz wurde EMNIST verwendet, welcher in mehreren Datensatz-Varianten und Formaten vorliegt. Der EMNIST-Datensatz wurde in ein 28x28-Pixel-Bildformat abgeändert und in eine Datensatzstruktur konvertiert, die direkt mit dem MNIST-Datensatz übereinstimmt, weshalb der Name auch EMNIST lautet für *Extended MNIST*. Weiteres zum Datensatz ist auf der folgenden [Seite](https://www.nist.gov/itl/products-and-services/emnist-dataset) nachzulesen.
 
 *Subject area: Machine Learning, Deep Learning, Neural Network Architectures*
