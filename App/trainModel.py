@@ -74,26 +74,22 @@ def create_model():
     # build a sequential model
     model = Sequential()
     # 1st conv block
-    model.add(Convolution2D(filters=32, kernel_size=(5, 5), activation='relu', input_shape=(28, 28, 1), padding='same'))
-    model.add(Convolution2D(filters=32, kernel_size=(5, 5), activation='relu'))
+    model.add(Convolution2D(filters=32, kernel_size=(3, 3), activation='relu', input_shape=(28, 28, 1), padding='same'))
+    model.add(Convolution2D(filters=64, kernel_size=(3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=2))
     model.add(Dropout(0.1))
     # 2nd conv block
     model.add(Convolution2D(filters=64, kernel_size=(3, 3), activation='relu'))
-    model.add(Convolution2D(filters=64, kernel_size=(3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2), strides=2))
+    model.add(Convolution2D(filters=128, kernel_size=(3, 3), activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.2))
     # 3nd conv block
-    model.add(Convolution2D(filters=128, kernel_size=(3, 3), activation='relu', padding='valid'))
-    model.add(MaxPooling2D(pool_size=(2, 2), strides=2))
+    model.add(Convolution2D(filters=256, kernel_size=(1, 1), activation='relu', padding='valid'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.3))
     # flatten output of conv
     model.add(Flatten())
-    # hidden layer
-    model.add(Dense(64, activation="relu"))
-    model.add(Dense(128, activation="relu"))
     # output layer
-    model.add(Dropout(0.5))
     model.add(Dense(num_classes, activation='softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
@@ -112,7 +108,7 @@ history = model.fit(training_images, training_labels, validation_data=(test_imag
 print("Model has been successfully trained...")
 
 # save the model
-model.save('model_ReadyToUse.h5')
+model.save('trainedModel.h5')
 print('The model has sucessfully been saved...')
 
 # evaluate the model

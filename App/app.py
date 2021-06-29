@@ -8,7 +8,7 @@ from PIL import ImageGrab
 from keras.models import load_model
 import evalPicture as ownLib
 
-model = load_model(r'model_Balanced.h5')
+model = load_model(r'trainedModel.h5')
 width = 748
 height = 748
 filename = r'images/my_drawing.png'
