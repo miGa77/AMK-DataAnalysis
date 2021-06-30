@@ -86,7 +86,11 @@ _2_ = Ausführen der *app.py*
 
 ## Probleme & Lösung
 * Bilder sind zentriert und haben kein Noise da der Datenbestand bereits gereinigt zur Verfügung gestellt wurde
-&rightarrow; Lösung ist das Benutzen im *trainModel.py* Skript eines ImageDataGenerators. Dieser kann die Bilder des DataSets nehmen und zufällige Bilder verändern anhand von angegebenen Parametern. Wichtig zu erwähnen ist, das keine Bilder generiert und den Datenbestand hinzugefügt wird, es werden Bilder im Datenbestand verändert
+&rightarrow; Lösung ist das Benutzen im *trainModel.py* Skript eines ImageDataGenerators. Dieser kann die Bilder des DataSets nehmen und zufällige Bilder verändern anhand von angegebenen Parametern. Wichtig zu erwähnen ist, das keine Bilder generiert und den Datenbestand hinzugefügt wird, es werden Bilder im Datenbestand verändert. Somit findet die Datenerweiterung (Data Augmentation) vor Ort statt und wird auch In-Place-Datenerweiterung genannt. (in-place data augmentation). Das folgende Bild erklärt die Sachlage ziemlich gut.
+
+![grafik](https://github.com/miGa77/AMK-DataAnalysis/blob/test/doc/keras_data_augmentation_in_place.png)
+
+
 * Probleme beim Benutzen von unbalancierten Klassen, die aber prinzipiell einen größeren Datenbestand haben
 &rightarrow; Lösung ist das Benutzen von balancierten Klassen. Es ist durchaus üblich, dass in einem Dataset eine unausgeglichene Klassenverteilung vorliegt. Um dieses Problem zu lösen, stehen zwei gängige Methoden zur Verfügung, die Oversampling und Undersampling genannt werden. EMNIST hat bereits das Problem von unbalancierten Klassen gelöst und bietet balancierte Klassen an.
 * Probleme beim Auswerten von Bildern wo zu nah am Rand geschrieben wurde
