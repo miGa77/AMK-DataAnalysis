@@ -108,7 +108,9 @@ Problem war das ROI (Region of Interest) in einer Funktion 0 war, was nicht vork
  * Weiteres Problem im folgendem Bild sichtbar. Lösung ist keine vorhanden.
 ![grafik](https://github.com/miGa77/AMK-DataAnalysis/blob/main/doc/Bild.jpg)
  
- 
+## Auswertung
+Mit einer Accuracy von ca. 89 % ist das CNN-Model ein gutes sequentielles Beispiel für den EMNIST-Datensatz. Siehe auch [hier](https://paperswithcode.com/sota/image-classification-on-emnist-balanced).
+
 ### Credits:
 
 [Cohen, G., Afshar, S., Tapson, J., & van Schaik, A. (2017). EMNIST: an extension of MNIST to handwritten letters](http://arxiv.org/abs/1702.05373)
