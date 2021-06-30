@@ -108,7 +108,7 @@ history = model.fit(training_images, training_labels, validation_data=(test_imag
 print("Model has been successfully trained...")
 
 # save the model
-model.save('trainedModel.h5')
+model.save('./data/save_trainedModel.h5')
 print('The model has sucessfully been saved...')
 
 # evaluate the model
