@@ -1,8 +1,7 @@
 # Die handschriftliche alphanumerische Erkennung
 Sequential CNN for Handwritten Alphanumeric Recognition
 
-[![Generic badge](https://img.shields.io/badge/ready-passing-<green>.svg)](https://shields.io/) ![Maintaner](https://img.shields.io/badge/maintainer-kevingostomski-blue)
-
+[![Generic badge](https://img.shields.io/badge/ready-passing-<green>.svg)](https://shields.io/)
 
 ## Überblick
 
