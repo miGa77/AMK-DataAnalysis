@@ -46,13 +46,15 @@ def recognize(filename, model):
             img = img / 255.0
             pred = model.predict([img])[0]
             index = np.argmax(pred)
+            accuracy = str(round(np.max(pred), 2))
             final_pred = __LABELS[index]
             data = str(final_pred)
             font = cv2.FONT_HERSHEY_SIMPLEX
             fontScale = 0.5
             color = (255, 0, 0)
             thickness = 1
-            cv2.putText(image, data, (x, y - 5), font, fontScale, color, thickness)
+            output_text = "Char: " + data + ", Accuracy: " + accuracy
+            cv2.putText(image, output_text, (x, y - 5), font, fontScale, color, thickness)
             cv2.imshow('image', image)
             cv2.waitKey(0)
         except Exception as e:
